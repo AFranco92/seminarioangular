@@ -1,0 +1,34 @@
+<section class="beerlist">
+  <table>
+    <thead>
+      <tr>
+        <td>{{titulos.name}}</td>
+        <td>{{titulos.description}}</td>
+        <td>{{titulos.price}}</td>
+        <td>{{titulos.image}}</td>
+        <td>{{titulos.stock}}</td>
+        <td>{{titulos.tobuy}}</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cerveza of cervezas">
+        <td>{{cerveza.name}}</td>
+        <td>{{cerveza.description}}</td>
+        <td>{{cerveza.price | currency: '$'}}</td>
+        <td>{{cerveza.image}}</td>
+        <td>
+          <span *ngIf="cerveza.stock === 0">AGOTADO</span>
+          <span *ngIf="cerveza.stock > 0">HAY {{cerveza.stock}}</span>
+        </td>
+        <td>
+          <input type="text" value="{{cerveza.tobuy}}">
+          <button (click)="masCerveza(cerveza)">+</button>
+          <button (click)="menosCerveza(cerveza)">-</button>
+        </td>
+        <td>
+          <button (click)="comprar(cerveza, cerveza.tobuy)">Comprar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>             
