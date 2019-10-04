@@ -6,6 +6,10 @@
   margin-top: 7px;
   background: linear-gradient(to top, rgba(147,206,222,1) 0%, rgba(101,120,125,1) 78%, rgba(101,120,125,1) 100%);  
 }
+button {
+  border-radius: 5px;
+  margin: 1px;
+}
 td {
   border: solid 2px black;
   padding: 5px;
@@ -20,4 +24,12 @@ thead {
 }
 input {
   width: 30px;
+}
+.enoferta {
+  background-color: aqua;
+  color: black;
+}
+.nostock {
+  background-color: crimson; 
+  color: white;
 }

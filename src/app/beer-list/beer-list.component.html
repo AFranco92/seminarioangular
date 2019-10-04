@@ -7,11 +7,14 @@
         <td>{{titulos.price}}</td>
         <td>{{titulos.image}}</td>
         <td>{{titulos.stock}}</td>
-        <td>{{titulos.tobuy}}</td>
       </tr>
     </thead>
+    <img [src]="imgSource" alt="">
     <tbody>
-      <tr *ngFor="let cerveza of cervezas">
+      <tr *ngFor="let cerveza of cervezas" [ngClass]="{
+        'enoferta' : cerveza.price < 100,
+        'nostock' : cerveza.stock === 0
+      }">
         <td>{{cerveza.name}}</td>
         <td>{{cerveza.description}}</td>
         <td>{{cerveza.price | currency: '$'}}</td>
@@ -21,9 +24,9 @@
           <span *ngIf="cerveza.stock > 0">HAY {{cerveza.stock}}</span>
         </td>
         <td>
-          <input type="text" value="{{cerveza.tobuy}}">
+          <input type="text" [(ngModel)]="cerveza.tobuy" (keypress)="onlyNumbers($event)">
           <button (click)="masCerveza(cerveza)">+</button>
-          <button (click)="menosCerveza(cerveza)">-</button>
+          <button [disabled]="cerveza.stock <= 0" (click)="menosCerveza(cerveza)">-</button>
         </td>
         <td>
           <button (click)="comprar(cerveza, cerveza.tobuy)">Comprar</button>

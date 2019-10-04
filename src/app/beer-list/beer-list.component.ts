@@ -19,6 +19,8 @@ export class BeerListComponent implements OnInit {
 
   public cervezas: Beer[];
 
+  public inputValue: String = "";
+
   ngOnInit() {
     this.cervezas = BEERS;
   }
@@ -39,5 +41,10 @@ export class BeerListComponent implements OnInit {
     if(cerveza.stock > 0) {
       cerveza.stock -= quantity;
     }
+  }
+
+  onlyNumbers(event) {
+    if(event.key < "0" || event.key > "9")
+      event.preventDefault();
   }
 }
