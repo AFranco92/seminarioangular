@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Beer } from '../../app/beer';
-import { BEERS } from '../mocks';
+import { BeerDataService } from '../beer-data.service';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-beer-list',
@@ -11,35 +12,42 @@ export class BeerListComponent implements OnInit {
   public titulos: any = {
       name : 'Nombre de cerveza',
       description : 'Descripción',
-      price : 'Precio',
+      price : 'Precio unitario',
       image : 'Imagen',
       stock : 'Stock',
-      tobuy : 'A comprar',
+      quantity: 'Cantidad',
   }
 
+  constructor(private beersdataservice: BeerDataService, private cartservice: CartService) {}
+  
   public cervezas: Beer[];
+  public subtotal: number = 0;
 
   public inputValue: String = "";
 
   ngOnInit() {
-    this.cervezas = BEERS;
+    this.beersdataservice.getBeers().subscribe(
+      response => {
+        this.cervezas = [];
+        for (const key in response) {
+          if (response.hasOwnProperty(key)) {
+            const element = response[key];
+            this.cervezas.push(element);
+          }
+        }
+      }
+    )
   }
 
   masCerveza(cerveza) {
-    if(cerveza.stock > 0 && cerveza.tobuy < cerveza.stock) {
-      cerveza.tobuy += 1;
+    if(cerveza.stock > 0 && cerveza.quantity < cerveza.stock) {
+      cerveza.quantity += 1;
     }
   }
 
   menosCerveza(cerveza) {
-    if(cerveza.tobuy > 0) {
-      cerveza.tobuy -= 1;
-    }
-  }
-
-  comprar(cerveza, quantity) {
-    if(cerveza.stock > 0) {
-      cerveza.stock -= quantity;
+    if(cerveza.quantity > 0) {
+      cerveza.quantity -= 1;
     }
   }
 
@@ -47,4 +55,12 @@ export class BeerListComponent implements OnInit {
     if(event.key < "0" || event.key > "9")
       event.preventDefault();
   }
+
+  addCart(beer: Beer) {
+    if(beer.stock > 0 && beer.quantity <= beer.stock && beer.quantity > 0) {
+      this.cartservice.addToCart(beer);
+      beer.stock -= beer.quantity;
+    }
+  }
+
 }

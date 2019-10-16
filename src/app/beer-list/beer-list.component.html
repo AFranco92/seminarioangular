@@ -12,26 +12,26 @@
     <img [src]="imgSource" alt="">
     <tbody>
       <tr *ngFor="let cerveza of cervezas" [ngClass]="{
-        'enoferta' : cerveza.price < 100,
+        'enoferta' : cerveza.price < 40,
         'nostock' : cerveza.stock === 0
       }">
+        <td>{{cerveza.style}}</td>
         <td>{{cerveza.name}}</td>
-        <td>{{cerveza.description}}</td>
         <td>{{cerveza.price | currency: '$'}}</td>
-        <td>{{cerveza.image}}</td>
+        <td><img class="beerimg" src="../../assets{{cerveza.image}}" alt=""></td>
         <td>
           <span *ngIf="cerveza.stock === 0">AGOTADO</span>
           <span *ngIf="cerveza.stock > 0">HAY {{cerveza.stock}}</span>
         </td>
         <td>
-          <input type="text" [(ngModel)]="cerveza.tobuy" (keypress)="onlyNumbers($event)">
-          <button (click)="masCerveza(cerveza)">+</button>
-          <button [disabled]="cerveza.stock <= 0" (click)="menosCerveza(cerveza)">-</button>
+          <input [disabled]="cerveza.stock == 0" type="text" [(ngModel)]="cerveza.quantity" (keypress)="onlyNumbers($event)">
+          <button [disabled]="cerveza.stock == 0" (click)="masCerveza(cerveza)">+</button>
+          <button [disabled]="cerveza.stock == 0" (click)="menosCerveza(cerveza)">-</button>
         </td>
         <td>
-          <button (click)="comprar(cerveza, cerveza.tobuy)">Comprar</button>
+          <button [disabled]="cerveza.stock == 0" (click)="addCart(cerveza)">Agregar al carrito</button>
         </td>
       </tr>
     </tbody>
   </table>
-</section>             
+</section>

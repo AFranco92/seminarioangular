@@ -1,14 +1,19 @@
 <section class="beercart">
-  <table>
-    <thead>
+  <table class="beercarttable">
+    <thead class="beercarthead">
       <tr>
         <td>{{titulos.name}}</td>
         <td>{{titulos.quantity}}</td>
-        <td>{{titulos.unitprice}}</td>
-        <td>{{titulos.total}}</td>
+        <td>{{titulos.price}}</td>
       </tr>
     </thead>
-    <tbody>                
+    <tbody>
+      <tr *ngFor="let beer of beers">
+        <td>{{beer.style}}</td>
+        <td>{{beer.quantity}}</td>
+        <td>{{beer.price | currency: '$'}}</td>
+      </tr>
     </tbody>
   </table>
+  <div><span>Total: {{total | currency: '$'}}</span></div>
 </section>

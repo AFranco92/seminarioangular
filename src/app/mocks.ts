@@ -2,34 +2,30 @@ import { Beer } from '../app/beer';
 export const BEERS: Beer[] = [
   {
     name : 'Kunchuripa',
-    description : 'Amarga',
+    style : 'Amarga',
     price : 50,
     image : '-',
-    stock : 22,
-    tobuy : 0,
+    quantity : 22,
   },    
   {
     name : 'IPA',
-    description : 'Muy amarga',
+    style : 'Muy amarga',
     price : 100,
     image : '-',
-    stock : 16,
-    tobuy : 0,
+    quantity : 16,
   },    
   {
     name : 'APA',
-    description : 'Amarga',
+    style : 'Amarga',
     price : 100,
     image : '-',
-    stock : 0,
-    tobuy : 0,
+    quantity : 0,
   },
   {
     name : 'Porter',
-    description : 'Negra tostada',
+    style : 'Negra tostada',
     price : 100,
     image : '-',
-    stock : 0,
-    tobuy : 0,
+    quantity : 0,
   }
 ];

@@ -7,11 +7,15 @@
   margin-left: 10px;
   background-image: url('../../assets/images/cart.png');
 }
-td {
+.beercarttable.beercarthead {
+  background-color: lightblue;
+  color: black;
+}
+.beercart td {
   border: solid 2px black;
   padding: 5px;
 }
-.beercart, td {
+.beercart, .beercart td {
   width: 29vw;
   background-color: #576E79;
   border-radius: 5px;
